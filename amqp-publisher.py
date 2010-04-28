@@ -1,12 +1,15 @@
-from amqplib import client_0_8 as amqp
+from carrot.connection import BrokerConnection
+from carrot.messaging import Publisher
+
 import sys
 
-conn = amqp.Connection(host="localhost:5672", userid="guest", password="guest", virtual_host="/", insist=False)
-chan = conn.channel()
+conn = BrokerConnection(hostname="localhost", port=5672,
+    userid="guest", password="guest",
+    virtual_host="/")
 
-msg = amqp.Message(sys.argv[1])
-msg.properties["delivery_mode"] = 2
-chan.basic_publish(msg,exchange="sorting_room",routing_key="jason")
+publisher = Publisher(connection=conn,
+    exchange="sorting_room",
+    routing_key="jason")
 
-chan.close()
-conn.close()
+publisher.send({"po_box": sys.argv[1]})
+publisher.close()
