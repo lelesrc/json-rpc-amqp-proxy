@@ -2,9 +2,11 @@ Prerequirements
 ---------------
 
 * [carrot](http://github.com/ask/carrot)
+
 	$ easy_install carrot
 
 * [jsonrpclib](http://code.google.com/p/jsonrpclib/)
+
 	Move to the cloned directory 
 	  $ cd json-rpc-amqp-proxy
 	  $ svn co http://jsonrpclib.googlecode.com/svn/trunk/jsonrpclib
